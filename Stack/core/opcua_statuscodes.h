@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 #ifndef _OpcUa_StatusCodes_H_
 #define _OpcUa_StatusCodes_H_ 1
@@ -470,6 +483,11 @@ OPCUA_BEGIN_EXTERN_C
 #define OpcUa_BadNodeNotInView 0x804E0000
 
 /*============================================================================
+ * The number was not accepted because of a numeric overflow.
+ *===========================================================================*/
+#define OpcUa_BadNumericOverflow 0x81120000
+
+/*============================================================================
  * The ServerUri is not a valid URI.
  *===========================================================================*/
 #define OpcUa_BadServerUriInvalid 0x804F0000
@@ -718,6 +736,11 @@ OPCUA_BEGIN_EXTERN_C
  * The client did not specify all of the input arguments for the method.
  *===========================================================================*/
 #define OpcUa_BadArgumentsMissing 0x80760000
+
+/*============================================================================
+ * The executable attribute does not allow the execution of the method.
+ *===========================================================================*/
+#define OpcUa_BadNotExecutable 0x81110000
 
 /*============================================================================
  * The server has reached its  maximum number of subscriptions.
@@ -1048,6 +1071,11 @@ OPCUA_BEGIN_EXTERN_C
  * The request was rejected by the server because it did not meet the criteria set by the server.
  *===========================================================================*/
 #define OpcUa_BadRequestNotAllowed 0x80E40000
+
+/*============================================================================
+ * The request has not been processed by the server yet.
+ *===========================================================================*/
+#define OpcUa_BadRequestNotComplete 0x81130000
 
 /*============================================================================
  * The value does not come from the real source and has been edited by the server.

@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 #ifndef _OpcUa_Attributes_H_
 #define _OpcUa_Attributes_H_ 1
@@ -128,6 +141,31 @@ OPCUA_BEGIN_EXTERN_C
  * Whether the method can be called by the current user.
  *===========================================================================*/
 #define OpcUa_Attributes_UserExecutable 22
+
+/*============================================================================
+ * Provides the metadata and encoding information for custom DataTypes.
+ *===========================================================================*/
+#define OpcUa_Attributes_DataTypeDefinition 23
+
+/*============================================================================
+ * The permissions for the node granted to roles.
+ *===========================================================================*/
+#define OpcUa_Attributes_RolePermissions 24
+
+/*============================================================================
+ * The subset of permissions available for the roles available to the current session.
+ *===========================================================================*/
+#define OpcUa_Attributes_UserRolePermissions 25
+
+/*============================================================================
+ * The access restrictions assigned to the node.
+ *===========================================================================*/
+#define OpcUa_Attributes_AccessRestrictions 26
+
+/*============================================================================
+ * How a variable may be accessed.
+ *===========================================================================*/
+#define OpcUa_Attributes_AccessLevelEx 27
 
 OPCUA_END_EXTERN_C
 

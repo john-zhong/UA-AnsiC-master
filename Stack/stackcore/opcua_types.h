@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 #ifndef _OpcUa_Types_H_
 #define _OpcUa_Types_H_ 1
@@ -77,6 +90,242 @@ OpcUa_NodeClass;
 OPCUA_IMEXPORT extern struct _OpcUa_EnumeratedType OpcUa_NodeClass_EnumeratedType;
 #endif
 
+#ifndef OPCUA_EXCLUDE_PermissionType
+/*============================================================================
+ * The PermissionType enumeration.
+ *===========================================================================*/
+typedef enum _OpcUa_PermissionType
+{
+    OpcUa_PermissionType_None                 = 0,
+    OpcUa_PermissionType_Browse               = 1,
+    OpcUa_PermissionType_ReadRolePermissions  = 2,
+    OpcUa_PermissionType_WriteAttribute       = 4,
+    OpcUa_PermissionType_WriteRolePermissions = 8,
+    OpcUa_PermissionType_WriteHistorizing     = 16,
+    OpcUa_PermissionType_Read                 = 32,
+    OpcUa_PermissionType_Write                = 64,
+    OpcUa_PermissionType_ReadHistory          = 128,
+    OpcUa_PermissionType_InsertHistory        = 256,
+    OpcUa_PermissionType_ModifyHistory        = 512,
+    OpcUa_PermissionType_DeleteHistory        = 1024,
+    OpcUa_PermissionType_ReceiveEvents        = 2048,
+    OpcUa_PermissionType_Call                 = 4096,
+    OpcUa_PermissionType_AddReference         = 8192,
+    OpcUa_PermissionType_RemoveReference      = 16384,
+    OpcUa_PermissionType_DeleteNode           = 32768,
+    OpcUa_PermissionType_AddNode              = 65536,
+    OpcUa_PermissionType_All                  = 131071
+#if OPCUA_FORCE_INT32_ENUMS
+    ,_OpcUa_PermissionType_MaxEnumerationValue = OpcUa_Int32_Max
+#endif
+}
+OpcUa_PermissionType;
+
+#define OpcUa_PermissionType_Clear(xValue) OpcUa_EnumeratedType_Clear(xValue, OpcUa_PermissionType_None)
+
+#define OpcUa_PermissionType_Initialize(xValue) OpcUa_EnumeratedType_Initialize(xValue, OpcUa_PermissionType_None)
+
+OPCUA_IMEXPORT extern struct _OpcUa_EnumeratedType OpcUa_PermissionType_EnumeratedType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_AccessRestrictionType
+/*============================================================================
+ * The AccessRestrictionType enumeration.
+ *===========================================================================*/
+typedef enum _OpcUa_AccessRestrictionType
+{
+    OpcUa_AccessRestrictionType_None               = 0,
+    OpcUa_AccessRestrictionType_SigningRequired    = 1,
+    OpcUa_AccessRestrictionType_EncryptionRequired = 2,
+    OpcUa_AccessRestrictionType_SessionRequired    = 4
+#if OPCUA_FORCE_INT32_ENUMS
+    ,_OpcUa_AccessRestrictionType_MaxEnumerationValue = OpcUa_Int32_Max
+#endif
+}
+OpcUa_AccessRestrictionType;
+
+#define OpcUa_AccessRestrictionType_Clear(xValue) OpcUa_EnumeratedType_Clear(xValue, OpcUa_AccessRestrictionType_None)
+
+#define OpcUa_AccessRestrictionType_Initialize(xValue) OpcUa_EnumeratedType_Initialize(xValue, OpcUa_AccessRestrictionType_None)
+
+OPCUA_IMEXPORT extern struct _OpcUa_EnumeratedType OpcUa_AccessRestrictionType_EnumeratedType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_RolePermissionType
+/*============================================================================
+ * The RolePermissionType structure.
+ *===========================================================================*/
+typedef struct _OpcUa_RolePermissionType
+{
+    OpcUa_NodeId RoleId;
+    OpcUa_UInt32 Permissions;
+}
+OpcUa_RolePermissionType;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_RolePermissionType_Initialize(OpcUa_RolePermissionType* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_RolePermissionType_Clear(OpcUa_RolePermissionType* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_RolePermissionType_GetSize(OpcUa_RolePermissionType* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_RolePermissionType_Encode(OpcUa_RolePermissionType* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_RolePermissionType_Decode(OpcUa_RolePermissionType* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_RolePermissionType_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_StructureType
+/*============================================================================
+ * The StructureType enumeration.
+ *===========================================================================*/
+typedef enum _OpcUa_StructureType
+{
+    OpcUa_StructureType_Structure                   = 0,
+    OpcUa_StructureType_StructureWithOptionalFields = 1,
+    OpcUa_StructureType_Union                       = 2
+#if OPCUA_FORCE_INT32_ENUMS
+    ,_OpcUa_StructureType_MaxEnumerationValue = OpcUa_Int32_Max
+#endif
+}
+OpcUa_StructureType;
+
+#define OpcUa_StructureType_Clear(xValue) OpcUa_EnumeratedType_Clear(xValue, OpcUa_StructureType_Structure)
+
+#define OpcUa_StructureType_Initialize(xValue) OpcUa_EnumeratedType_Initialize(xValue, OpcUa_StructureType_Structure)
+
+OPCUA_IMEXPORT extern struct _OpcUa_EnumeratedType OpcUa_StructureType_EnumeratedType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_StructureField
+/*============================================================================
+ * The StructureField structure.
+ *===========================================================================*/
+typedef struct _OpcUa_StructureField
+{
+    OpcUa_String        Name;
+    OpcUa_LocalizedText Description;
+    OpcUa_NodeId        DataType;
+    OpcUa_Int32         ValueRank;
+    OpcUa_Boolean       IsOptional;
+}
+OpcUa_StructureField;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_StructureField_Initialize(OpcUa_StructureField* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_StructureField_Clear(OpcUa_StructureField* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureField_GetSize(OpcUa_StructureField* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureField_Encode(OpcUa_StructureField* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureField_Decode(OpcUa_StructureField* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_StructureField_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_StructureDefinition
+/*============================================================================
+ * The StructureDefinition structure.
+ *===========================================================================*/
+typedef struct _OpcUa_StructureDefinition
+{
+    OpcUa_NodeId          DefaultEncodingId;
+    OpcUa_NodeId          BaseDataType;
+    OpcUa_StructureType   StructureType;
+    OpcUa_Int32           NoOfFields;
+    OpcUa_StructureField* Fields;
+}
+OpcUa_StructureDefinition;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_StructureDefinition_Initialize(OpcUa_StructureDefinition* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_StructureDefinition_Clear(OpcUa_StructureDefinition* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureDefinition_GetSize(OpcUa_StructureDefinition* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureDefinition_Encode(OpcUa_StructureDefinition* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_StructureDefinition_Decode(OpcUa_StructureDefinition* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_StructureDefinition_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_EnumValueType
+/*============================================================================
+ * The EnumValueType structure.
+ *===========================================================================*/
+typedef struct _OpcUa_EnumValueType
+{
+    OpcUa_Int64         Value;
+    OpcUa_LocalizedText DisplayName;
+    OpcUa_LocalizedText Description;
+}
+OpcUa_EnumValueType;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumValueType_Initialize(OpcUa_EnumValueType* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumValueType_Clear(OpcUa_EnumValueType* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_GetSize(OpcUa_EnumValueType* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_Encode(OpcUa_EnumValueType* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_Decode(OpcUa_EnumValueType* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_EnumValueType_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_EnumField
+/*============================================================================
+ * The EnumField structure.
+ *===========================================================================*/
+typedef struct _OpcUa_EnumField
+{
+    OpcUa_Int64         Value;
+    OpcUa_LocalizedText DisplayName;
+    OpcUa_LocalizedText Description;
+    OpcUa_String        Name;
+}
+OpcUa_EnumField;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumField_Initialize(OpcUa_EnumField* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumField_Clear(OpcUa_EnumField* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumField_GetSize(OpcUa_EnumField* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumField_Encode(OpcUa_EnumField* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumField_Decode(OpcUa_EnumField* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_EnumField_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_EnumDefinition
+/*============================================================================
+ * The EnumDefinition structure.
+ *===========================================================================*/
+typedef struct _OpcUa_EnumDefinition
+{
+    OpcUa_Int32      NoOfFields;
+    OpcUa_EnumField* Fields;
+}
+OpcUa_EnumDefinition;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumDefinition_Initialize(OpcUa_EnumDefinition* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_EnumDefinition_Clear(OpcUa_EnumDefinition* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumDefinition_GetSize(OpcUa_EnumDefinition* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumDefinition_Encode(OpcUa_EnumDefinition* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumDefinition_Decode(OpcUa_EnumDefinition* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_EnumDefinition_EncodeableType;
+#endif
+
 #ifndef OPCUA_EXCLUDE_ReferenceNode
 /*============================================================================
  * The ReferenceNode structure.
@@ -108,15 +357,20 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ReferenceNode_Encodeabl
  *===========================================================================*/
 typedef struct _OpcUa_Node
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
 }
 OpcUa_Node;
 
@@ -139,15 +393,20 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_Node_EncodeableType;
  *===========================================================================*/
 typedef struct _OpcUa_InstanceNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
 }
 OpcUa_InstanceNode;
 
@@ -170,15 +429,20 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_InstanceNode_Encodeable
  *===========================================================================*/
 typedef struct _OpcUa_TypeNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
 }
 OpcUa_TypeNode;
 
@@ -201,16 +465,21 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_TypeNode_EncodeableType
  *===========================================================================*/
 typedef struct _OpcUa_ObjectNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Byte           EventNotifier;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Byte                EventNotifier;
 }
 OpcUa_ObjectNode;
 
@@ -233,16 +502,21 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ObjectNode_EncodeableTy
  *===========================================================================*/
 typedef struct _OpcUa_ObjectTypeNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Boolean        IsAbstract;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Boolean             IsAbstract;
 }
 OpcUa_ObjectTypeNode;
 
@@ -265,24 +539,30 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ObjectTypeNode_Encodeab
  *===========================================================================*/
 typedef struct _OpcUa_VariableNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Variant        Value;
-    OpcUa_NodeId         DataType;
-    OpcUa_Int32          ValueRank;
-    OpcUa_Int32          NoOfArrayDimensions;
-    OpcUa_UInt32*        ArrayDimensions;
-    OpcUa_Byte           AccessLevel;
-    OpcUa_Byte           UserAccessLevel;
-    OpcUa_Double         MinimumSamplingInterval;
-    OpcUa_Boolean        Historizing;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Variant             Value;
+    OpcUa_NodeId              DataType;
+    OpcUa_Int32               ValueRank;
+    OpcUa_Int32               NoOfArrayDimensions;
+    OpcUa_UInt32*             ArrayDimensions;
+    OpcUa_Byte                AccessLevel;
+    OpcUa_Byte                UserAccessLevel;
+    OpcUa_Double              MinimumSamplingInterval;
+    OpcUa_Boolean             Historizing;
+    OpcUa_UInt32              AccessLevelEx;
 }
 OpcUa_VariableNode;
 
@@ -305,21 +585,26 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_VariableNode_Encodeable
  *===========================================================================*/
 typedef struct _OpcUa_VariableTypeNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Variant        Value;
-    OpcUa_NodeId         DataType;
-    OpcUa_Int32          ValueRank;
-    OpcUa_Int32          NoOfArrayDimensions;
-    OpcUa_UInt32*        ArrayDimensions;
-    OpcUa_Boolean        IsAbstract;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Variant             Value;
+    OpcUa_NodeId              DataType;
+    OpcUa_Int32               ValueRank;
+    OpcUa_Int32               NoOfArrayDimensions;
+    OpcUa_UInt32*             ArrayDimensions;
+    OpcUa_Boolean             IsAbstract;
 }
 OpcUa_VariableTypeNode;
 
@@ -342,18 +627,23 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_VariableTypeNode_Encode
  *===========================================================================*/
 typedef struct _OpcUa_ReferenceTypeNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Boolean        IsAbstract;
-    OpcUa_Boolean        Symmetric;
-    OpcUa_LocalizedText  InverseName;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Boolean             IsAbstract;
+    OpcUa_Boolean             Symmetric;
+    OpcUa_LocalizedText       InverseName;
 }
 OpcUa_ReferenceTypeNode;
 
@@ -376,17 +666,22 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ReferenceTypeNode_Encod
  *===========================================================================*/
 typedef struct _OpcUa_MethodNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Boolean        Executable;
-    OpcUa_Boolean        UserExecutable;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Boolean             Executable;
+    OpcUa_Boolean             UserExecutable;
 }
 OpcUa_MethodNode;
 
@@ -409,17 +704,22 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_MethodNode_EncodeableTy
  *===========================================================================*/
 typedef struct _OpcUa_ViewNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Boolean        ContainsNoLoops;
-    OpcUa_Byte           EventNotifier;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Boolean             ContainsNoLoops;
+    OpcUa_Byte                EventNotifier;
 }
 OpcUa_ViewNode;
 
@@ -442,16 +742,22 @@ OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ViewNode_EncodeableType
  *===========================================================================*/
 typedef struct _OpcUa_DataTypeNode
 {
-    OpcUa_NodeId         NodeId;
-    OpcUa_NodeClass      NodeClass;
-    OpcUa_QualifiedName  BrowseName;
-    OpcUa_LocalizedText  DisplayName;
-    OpcUa_LocalizedText  Description;
-    OpcUa_UInt32         WriteMask;
-    OpcUa_UInt32         UserWriteMask;
-    OpcUa_Int32          NoOfReferences;
-    OpcUa_ReferenceNode* References;
-    OpcUa_Boolean        IsAbstract;
+    OpcUa_NodeId              NodeId;
+    OpcUa_NodeClass           NodeClass;
+    OpcUa_QualifiedName       BrowseName;
+    OpcUa_LocalizedText       DisplayName;
+    OpcUa_LocalizedText       Description;
+    OpcUa_UInt32              WriteMask;
+    OpcUa_UInt32              UserWriteMask;
+    OpcUa_Int32               NoOfRolePermissions;
+    OpcUa_RolePermissionType* RolePermissions;
+    OpcUa_Int32               NoOfUserRolePermissions;
+    OpcUa_RolePermissionType* UserRolePermissions;
+    OpcUa_UInt16              AccessRestrictions;
+    OpcUa_Int32               NoOfReferences;
+    OpcUa_ReferenceNode*      References;
+    OpcUa_Boolean             IsAbstract;
+    OpcUa_ExtensionObject     DataTypeDefinition;
 }
 OpcUa_DataTypeNode;
 
@@ -494,31 +800,6 @@ OPCUA_EXPORT OpcUa_StatusCode OpcUa_Argument_Encode(OpcUa_Argument* pValue, stru
 OPCUA_EXPORT OpcUa_StatusCode OpcUa_Argument_Decode(OpcUa_Argument* pValue, struct _OpcUa_Decoder* pDecoder);
 
 OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_Argument_EncodeableType;
-#endif
-
-#ifndef OPCUA_EXCLUDE_EnumValueType
-/*============================================================================
- * The EnumValueType structure.
- *===========================================================================*/
-typedef struct _OpcUa_EnumValueType
-{
-    OpcUa_Int64         Value;
-    OpcUa_LocalizedText DisplayName;
-    OpcUa_LocalizedText Description;
-}
-OpcUa_EnumValueType;
-
-OPCUA_EXPORT OpcUa_Void OpcUa_EnumValueType_Initialize(OpcUa_EnumValueType* pValue);
-
-OPCUA_EXPORT OpcUa_Void OpcUa_EnumValueType_Clear(OpcUa_EnumValueType* pValue);
-
-OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_GetSize(OpcUa_EnumValueType* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
-
-OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_Encode(OpcUa_EnumValueType* pValue, struct _OpcUa_Encoder* pEncoder);
-
-OPCUA_EXPORT OpcUa_StatusCode OpcUa_EnumValueType_Decode(OpcUa_EnumValueType* pValue, struct _OpcUa_Decoder* pDecoder);
-
-OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_EnumValueType_EncodeableType;
 #endif
 
 #ifndef OPCUA_EXCLUDE_OptionSet
@@ -701,6 +982,64 @@ OPCUA_EXPORT OpcUa_StatusCode OpcUa_ServiceFault_Encode(OpcUa_ServiceFault* pVal
 OPCUA_EXPORT OpcUa_StatusCode OpcUa_ServiceFault_Decode(OpcUa_ServiceFault* pValue, struct _OpcUa_Decoder* pDecoder);
 
 OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ServiceFault_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_SessionlessInvokeRequestType
+/*============================================================================
+ * The SessionlessInvokeRequestType structure.
+ *===========================================================================*/
+typedef struct _OpcUa_SessionlessInvokeRequestType
+{
+    OpcUa_Int32   NoOfUrisVersion;
+    OpcUa_UInt32* UrisVersion;
+    OpcUa_Int32   NoOfNamespaceUris;
+    OpcUa_String* NamespaceUris;
+    OpcUa_Int32   NoOfServerUris;
+    OpcUa_String* ServerUris;
+    OpcUa_Int32   NoOfLocaleIds;
+    OpcUa_String* LocaleIds;
+    OpcUa_UInt32  ServiceId;
+}
+OpcUa_SessionlessInvokeRequestType;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_SessionlessInvokeRequestType_Initialize(OpcUa_SessionlessInvokeRequestType* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_SessionlessInvokeRequestType_Clear(OpcUa_SessionlessInvokeRequestType* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeRequestType_GetSize(OpcUa_SessionlessInvokeRequestType* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeRequestType_Encode(OpcUa_SessionlessInvokeRequestType* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeRequestType_Decode(OpcUa_SessionlessInvokeRequestType* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_SessionlessInvokeRequestType_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_SessionlessInvokeResponseType
+/*============================================================================
+ * The SessionlessInvokeResponseType structure.
+ *===========================================================================*/
+typedef struct _OpcUa_SessionlessInvokeResponseType
+{
+    OpcUa_Int32   NoOfNamespaceUris;
+    OpcUa_String* NamespaceUris;
+    OpcUa_Int32   NoOfServerUris;
+    OpcUa_String* ServerUris;
+    OpcUa_UInt32  ServiceId;
+}
+OpcUa_SessionlessInvokeResponseType;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_SessionlessInvokeResponseType_Initialize(OpcUa_SessionlessInvokeResponseType* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_SessionlessInvokeResponseType_Clear(OpcUa_SessionlessInvokeResponseType* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeResponseType_GetSize(OpcUa_SessionlessInvokeResponseType* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeResponseType_Encode(OpcUa_SessionlessInvokeResponseType* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_SessionlessInvokeResponseType_Decode(OpcUa_SessionlessInvokeResponseType* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_SessionlessInvokeResponseType_EncodeableType;
 #endif
 
 #ifndef OPCUA_EXCLUDE_FindServers
@@ -1735,15 +2074,18 @@ typedef enum _OpcUa_NodeAttributesMask
     OpcUa_NodeAttributesMask_ValueRank               = 524288,
     OpcUa_NodeAttributesMask_WriteMask               = 1048576,
     OpcUa_NodeAttributesMask_Value                   = 2097152,
-    OpcUa_NodeAttributesMask_All                     = 4194303,
-    OpcUa_NodeAttributesMask_BaseNode                = 1335396,
-    OpcUa_NodeAttributesMask_Object                  = 1335524,
-    OpcUa_NodeAttributesMask_ObjectTypeOrDataType    = 1337444,
-    OpcUa_NodeAttributesMask_Variable                = 4026999,
-    OpcUa_NodeAttributesMask_VariableType            = 3958902,
-    OpcUa_NodeAttributesMask_Method                  = 1466724,
-    OpcUa_NodeAttributesMask_ReferenceType           = 1371236,
-    OpcUa_NodeAttributesMask_View                    = 1335532
+    OpcUa_NodeAttributesMask_DataTypeDefinition      = 4194304,
+    OpcUa_NodeAttributesMask_RolePermissions         = 8388608,
+    OpcUa_NodeAttributesMask_AccessRestrictions      = 16777216,
+    OpcUa_NodeAttributesMask_All                     = 33554431,
+    OpcUa_NodeAttributesMask_BaseNode                = 26501220,
+    OpcUa_NodeAttributesMask_Object                  = 26501348,
+    OpcUa_NodeAttributesMask_ObjectType              = 26503268,
+    OpcUa_NodeAttributesMask_Variable                = 26571383,
+    OpcUa_NodeAttributesMask_VariableType            = 28600438,
+    OpcUa_NodeAttributesMask_Method                  = 26632548,
+    OpcUa_NodeAttributesMask_ReferenceType           = 26537060,
+    OpcUa_NodeAttributesMask_View                    = 26501356
 #if OPCUA_FORCE_INT32_ENUMS
     ,_OpcUa_NodeAttributesMask_MaxEnumerationValue = OpcUa_Int32_Max
 #endif
@@ -2023,6 +2365,59 @@ OPCUA_EXPORT OpcUa_StatusCode OpcUa_ViewAttributes_Encode(OpcUa_ViewAttributes* 
 OPCUA_EXPORT OpcUa_StatusCode OpcUa_ViewAttributes_Decode(OpcUa_ViewAttributes* pValue, struct _OpcUa_Decoder* pDecoder);
 
 OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_ViewAttributes_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_GenericAttributeValue
+/*============================================================================
+ * The GenericAttributeValue structure.
+ *===========================================================================*/
+typedef struct _OpcUa_GenericAttributeValue
+{
+    OpcUa_UInt32  AttributeId;
+    OpcUa_Variant Value;
+}
+OpcUa_GenericAttributeValue;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_GenericAttributeValue_Initialize(OpcUa_GenericAttributeValue* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_GenericAttributeValue_Clear(OpcUa_GenericAttributeValue* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributeValue_GetSize(OpcUa_GenericAttributeValue* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributeValue_Encode(OpcUa_GenericAttributeValue* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributeValue_Decode(OpcUa_GenericAttributeValue* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_GenericAttributeValue_EncodeableType;
+#endif
+
+#ifndef OPCUA_EXCLUDE_GenericAttributes
+/*============================================================================
+ * The GenericAttributes structure.
+ *===========================================================================*/
+typedef struct _OpcUa_GenericAttributes
+{
+    OpcUa_UInt32                 SpecifiedAttributes;
+    OpcUa_LocalizedText          DisplayName;
+    OpcUa_LocalizedText          Description;
+    OpcUa_UInt32                 WriteMask;
+    OpcUa_UInt32                 UserWriteMask;
+    OpcUa_Int32                  NoOfAttributeValues;
+    OpcUa_GenericAttributeValue* AttributeValues;
+}
+OpcUa_GenericAttributes;
+
+OPCUA_EXPORT OpcUa_Void OpcUa_GenericAttributes_Initialize(OpcUa_GenericAttributes* pValue);
+
+OPCUA_EXPORT OpcUa_Void OpcUa_GenericAttributes_Clear(OpcUa_GenericAttributes* pValue);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributes_GetSize(OpcUa_GenericAttributes* pValue, struct _OpcUa_Encoder* pEncoder, OpcUa_Int32* pSize);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributes_Encode(OpcUa_GenericAttributes* pValue, struct _OpcUa_Encoder* pEncoder);
+
+OPCUA_EXPORT OpcUa_StatusCode OpcUa_GenericAttributes_Decode(OpcUa_GenericAttributes* pValue, struct _OpcUa_Decoder* pDecoder);
+
+OPCUA_IMEXPORT extern struct _OpcUa_EncodeableType OpcUa_GenericAttributes_EncodeableType;
 #endif
 
 #ifndef OPCUA_EXCLUDE_AddNodesItem
@@ -2401,7 +2796,11 @@ typedef enum _OpcUa_AttributeWriteMask
     OpcUa_AttributeWriteMask_UserWriteMask           = 262144,
     OpcUa_AttributeWriteMask_ValueRank               = 524288,
     OpcUa_AttributeWriteMask_WriteMask               = 1048576,
-    OpcUa_AttributeWriteMask_ValueForVariableType    = 2097152
+    OpcUa_AttributeWriteMask_ValueForVariableType    = 2097152,
+    OpcUa_AttributeWriteMask_DataTypeDefinition      = 4194304,
+    OpcUa_AttributeWriteMask_RolePermissions         = 8388608,
+    OpcUa_AttributeWriteMask_AccessRestrictions      = 16777216,
+    OpcUa_AttributeWriteMask_AccessLevelEx           = 33554432
 #if OPCUA_FORCE_INT32_ENUMS
     ,_OpcUa_AttributeWriteMask_MaxEnumerationValue = OpcUa_Int32_Max
 #endif

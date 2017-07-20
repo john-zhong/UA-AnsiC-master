@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 #ifndef _OpcUa_Exclusions_H_
 #define _OpcUa_Exclusions_H_ 1
@@ -64,7 +77,23 @@
 /*============================================================================
 * DataType Exclusions
  *===========================================================================*/
+/* #define OPCUA_EXCLUDE_KeyValuePair */
+/* #define OPCUA_EXCLUDE_IdentityMappingRuleType */
 /* #define OPCUA_EXCLUDE_TrustListDataType */
+/* #define OPCUA_EXCLUDE_DecimalDataType */
+/* #define OPCUA_EXCLUDE_ConfigurationVersionDataType */
+/* #define OPCUA_EXCLUDE_DataSetMetaDataType */
+/* #define OPCUA_EXCLUDE_FieldMetaData */
+/* #define OPCUA_EXCLUDE_DataTypeDescription */
+/* #define OPCUA_EXCLUDE_StructureDescription */
+/* #define OPCUA_EXCLUDE_EnumDescription */
+/* #define OPCUA_EXCLUDE_PublishedVariableDataType */
+/* #define OPCUA_EXCLUDE_FieldTargetDataType */
+/* #define OPCUA_EXCLUDE_RolePermissionType */
+/* #define OPCUA_EXCLUDE_DataTypeDefinition */
+/* #define OPCUA_EXCLUDE_StructureField */
+/* #define OPCUA_EXCLUDE_StructureDefinition */
+/* #define OPCUA_EXCLUDE_EnumDefinition */
 /* #define OPCUA_EXCLUDE_Node */
 /* #define OPCUA_EXCLUDE_InstanceNode */
 /* #define OPCUA_EXCLUDE_TypeNode */
@@ -79,6 +108,7 @@
 /* #define OPCUA_EXCLUDE_ReferenceNode */
 /* #define OPCUA_EXCLUDE_Argument */
 /* #define OPCUA_EXCLUDE_EnumValueType */
+/* #define OPCUA_EXCLUDE_EnumField */
 /* #define OPCUA_EXCLUDE_OptionSet */
 /* #define OPCUA_EXCLUDE_Union */
 /* #define OPCUA_EXCLUDE_TimeZoneDataType */
@@ -86,6 +116,8 @@
 /* #define OPCUA_EXCLUDE_RequestHeader */
 /* #define OPCUA_EXCLUDE_ResponseHeader */
 /* #define OPCUA_EXCLUDE_ServiceFault */
+/* #define OPCUA_EXCLUDE_SessionlessInvokeRequestType */
+/* #define OPCUA_EXCLUDE_SessionlessInvokeResponseType */
 /* #define OPCUA_EXCLUDE_ServerOnNetwork */
 /* #define OPCUA_EXCLUDE_UserTokenPolicy */
 /* #define OPCUA_EXCLUDE_EndpointDescription */
@@ -109,6 +141,8 @@
 /* #define OPCUA_EXCLUDE_ReferenceTypeAttributes */
 /* #define OPCUA_EXCLUDE_DataTypeAttributes */
 /* #define OPCUA_EXCLUDE_ViewAttributes */
+/* #define OPCUA_EXCLUDE_GenericAttributeValue */
+/* #define OPCUA_EXCLUDE_GenericAttributes */
 /* #define OPCUA_EXCLUDE_AddNodesItem */
 /* #define OPCUA_EXCLUDE_AddNodesResult */
 /* #define OPCUA_EXCLUDE_AddReferencesItem */
